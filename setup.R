@@ -8,6 +8,7 @@ library(shinycssloaders)
 library(dplyr)
 library(magrittr)
 library(janitor)
+library(lubridate)
 
 # Plotting packages ----
 library(plotly)
@@ -33,7 +34,9 @@ hb_names = get_resource("652ff726-e676-4a20-abda-435b98dd7bdc") |>
 # Matching health board name onto data and dropping unecessary columns
 ae_data_tidy = ae_data |> 
   left_join(hb_names) |> 
-  select(-c(hb_date_enacted, hb_date_archived, country))
+  select(-c(hb_date_enacted, hb_date_archived, country)) |> 
+  # Tidying dates
+  mutate(week_ending_date = ymd(week_ending_date))
 
 # Getting unique list of health boards for selectInput filter
 hb_list = ae_data_tidy |> 

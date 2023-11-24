@@ -45,14 +45,20 @@ tabPanel(title = "A&E Attendances",
     value = "intro",
 
     h1("A&E Attendances"),
-    uiOutput("page_1_ui"),
+    
+    fluidRow(
+      p("This tab shows number of A&E attendances across health boards in Scotland"),
+      p(strong("Use the filters below to select a Health Board")),
+      
+      selectInput("ae_select_hb",
+                  "Select a Health Board",
+                  choices = hb_list)
+      
+    ),
     linebreaks(2),
     h2("Number of A&E attendances in select health board"),
-    plotlyOutput("test_plot"),
-    linebreaks(2),
-    h2("An example data table using mtcars data"),
-    DT::dataTableOutput("test_data_table"),
-    linebreaks(2)
+    plotlyOutput("attendances_chart"),
+
 
     ) # tabpanel
     ) # navbar

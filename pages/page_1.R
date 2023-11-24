@@ -1,17 +1,17 @@
 ####################### Page 1 #######################
 
-output$page_1_ui <-  renderUI({
+# Setting up reactive dataset
+ae_data_reactive = reactive({
+  ae_data_tidy |> 
+    filter(hb_name == input$ae_select_hb)
+})
 
-  div(
-	     fluidRow(
-	           p("This tab shows number of A&E attendances across health boards in Scotland"),
-	           p(strong("Use the filters below to select a Health Board")),
-            
-            selectInput("ae_select_hb",
-                        "Select a Health Board",
-                        choices = hb_list)
-
-	      ) #fluidrow
-   ) # div
-}) # renderUI
-
+# Creating graph
+output$attendances_chart = renderPlotly({
+  
+  ae_data_reactive() |> 
+    plot_ly(x = ~week_ending_date,
+            y = ~number_of_attendances_episode,
+            type = "scatter", mode = "lines+markers")
+  
+})
