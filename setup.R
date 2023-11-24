@@ -46,6 +46,11 @@ ae_data_tidy = ae_data |>
   # Tidying dates
   mutate(week_ending_date = ymd(week_ending_date))
 
+# Aggregating to HB level
+ae_data_hb = ae_data_tidy |> 
+  group_by(week_ending_date, hb_name) |> 
+  summarise(number_of_attendances_episode = sum(number_of_attendances_episode))
+
 # Getting unique list of health boards for selectInput filter
 hb_list = ae_data_tidy |> 
   arrange(hb_name) |> 

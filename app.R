@@ -39,7 +39,7 @@ tabPanel(title = "Introduction",
 ##############################################.
 # PAGE 1 ----
 ##############################################.
-tabPanel(title = "A&E Attendances",
+tabPanel(title = "A&E Attendances by Health Board",
     # Look at https://fontawesome.com/search?m=free for icons
     icon = icon_no_warning_fn("stethoscope"),
     value = "intro",
@@ -60,10 +60,12 @@ tabPanel(title = "A&E Attendances",
     plotlyOutput("attendances_chart"),
 
 
-    ) # tabpanel
-    ) # navbar
-  ) # taglist
-) # ui fluidpage
+    ),
+
+tabPanel(title = "A&E Attendances by Location")
+    ) 
+  ) 
+) 
 
 # ----------------------------------------------
 # Server
