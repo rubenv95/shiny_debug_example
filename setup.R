@@ -60,7 +60,7 @@ hb_list = ae_data_tidy |>
 # Getting a list of hospital names, with health board too
 hosp_list = ae_data_tidy |> 
   arrange(hospital_name) |> 
-  distinct(hospital_name, hb_name)
+  distinct(hospital_name, hb_name, hb)
 
 
 ## Plotting ----

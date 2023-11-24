@@ -39,12 +39,12 @@ ui <- fluidPage(
       ##############################################.
       # PAGE 1 ----
       ##############################################.
-      tabPanel(title = "A&E Attendances by Health Board",
+      tabPanel(title = "Health Board",
                # Look at https://fontawesome.com/search?m=free for icons
                icon = icon_no_warning_fn("stethoscope"),
                value = "intro",
                
-               h1("A&E Attendances"),
+               h1("A&E Attendances by Health Board"),
                
                fluidRow(
                  p("This tab shows number of A&E attendances across health boards in Scotland"),
@@ -56,13 +56,29 @@ ui <- fluidPage(
                  
                ),
                linebreaks(2),
-               h2("Number of A&E attendances in select health board"),
-               plotlyOutput("attendances_chart"),
+               h2("Number of A&E attendances in selected health board"),
+               plotlyOutput("hb_attendances_chart"),
                
                
       ),
       
-      tabPanel(title = "A&E Attendances by Location")
+      tabPanel(title = "Hospital",
+               icon = icon_no_warning_fn("hospital"),
+               
+               h1("A&E Attendances by Hospital"),
+               
+               fluidRow(
+                 p("This tab shows number of A&E attendances by hospital in Scotland"),
+                 p(strong("Use the filters below to select a Health Board")),
+                 
+                 selectInput("hb_select_location",
+                             "Select a Health Board",
+                             choices = c("Scotland", hb_list)),
+                 
+                 uiOutput("hosp_input_ae")
+                 
+               ),
+               )
     ) 
   ) 
 ) 
