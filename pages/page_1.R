@@ -4,9 +4,13 @@ output$page_1_ui <-  renderUI({
 
   div(
 	     fluidRow(
-            h3("This is a header"),
-	           p("This is some text"),
-	           p(strong("This is some bold text"))
+            h3("A&E attendances"),
+	           p("This is a chart showing the number of A&E attendances across health boards in Scotland"),
+	           p(strong("Use the filters below to select a Health Board")),
+            
+            selectInput("ae_select_hb",
+                        "Select a Health Board",
+                        choices = hb_list)
 
 	      ) #fluidrow
    ) # div

@@ -35,6 +35,12 @@ ae_data_tidy = ae_data |>
   left_join(hb_names) |> 
   select(-c(hb_date_enacted, hb_date_archived, country))
 
+# Getting unique list of health boards for selectInput filter
+hb_list = ae_data_tidy |> 
+  arrange(hb_name) |> 
+  distinct(hb_name) |> 
+  pull(hb_name)
+
 ## Plotting ----
 # Style of x and y axis
 xaxis_plots <- list(title = FALSE, tickfont = list(size=14), titlefont = list(size=14),
