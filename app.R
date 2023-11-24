@@ -39,15 +39,15 @@ tabPanel(title = "Introduction",
 ##############################################.
 # PAGE 1 ----
 ##############################################.
-tabPanel(title = "Page 1",
+tabPanel(title = "A&E Attendances",
     # Look at https://fontawesome.com/search?m=free for icons
     icon = icon_no_warning_fn("stethoscope"),
     value = "intro",
 
-    h1("Page 1 title"),
+    h1("A&E Attendances"),
     uiOutput("page_1_ui"),
     linebreaks(2),
-    h2("An example plot using mtcars data"),
+    h2("Number of A&E attendances in select health board"),
     plotlyOutput("test_plot"),
     linebreaks(2),
     h2("An example data table using mtcars data"),
