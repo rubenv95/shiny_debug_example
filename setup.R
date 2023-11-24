@@ -26,14 +26,22 @@ source("functions/core_functions.R")
 ae_data = get_resource("a5f7ca94-c810-41b5-a7c9-25c18d43e5a4") |> 
   clean_names() |>
   # Renaming health board treatment to match to lookup
-  rename(hb = hbt)
+  rename(hb = hbt,
+         # Hospital code rename to match lookup
+         hospital_code = treatment_location)
 # Read in health board reference file
 hb_names = get_resource("652ff726-e676-4a20-abda-435b98dd7bdc") |> 
   clean_names()
 
+# Hospital code and name reference file
+hosp_names = get_resource("c698f450-eeed-41a0-88f7-c1e40a568acc") |> 
+  clean_names() |> 
+  select(1, 2)
+
 # Matching health board name onto data and dropping unecessary columns
 ae_data_tidy = ae_data |> 
   left_join(hb_names) |> 
+  left_join(hosp_names) |> 
   select(-c(hb_date_enacted, hb_date_archived, country)) |> 
   # Tidying dates
   mutate(week_ending_date = ymd(week_ending_date))
@@ -43,6 +51,12 @@ hb_list = ae_data_tidy |>
   arrange(hb_name) |> 
   distinct(hb_name) |> 
   pull(hb_name)
+
+# Getting a list of hospital names, with health board too
+hosp_list = ae_data_tidy |> 
+  arrange(hospital_name) |> 
+  distinct(hospital_name, hb_name)
+
 
 ## Plotting ----
 # Style of x and y axis
