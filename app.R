@@ -71,14 +71,17 @@ ui <- fluidPage(
                  p("This tab shows number of A&E attendances by hospital in Scotland"),
                  p(strong("Use the filters below to select a Health Board")),
                  
-                 selectInput("hb_select_location",
-                             "Select a Health Board",
-                             choices = c("Scotland", hb_list)),
+                 column(6,
+                        selectInput("hb_select_location",
+                                    "Select a Health Board",
+                                    choices = c("Scotland", hb_list))),
+                 column(6,
+                        uiOutput("input_hosp_ui"))),
                  
-                 uiOutput("hosp_input_ae")
-                 
-               ),
-               )
+                 plotlyOutput("location_graph")
+               
+                 )
+               
     ) 
   ) 
 ) 

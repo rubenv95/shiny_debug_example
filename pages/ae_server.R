@@ -62,3 +62,13 @@ output$input_hosp_ui = renderUI({
                                 plugins = list("remove_button")))
   
 })
+
+output$location_graph = renderPlotly({
+  req(input$hosp_input_ae)
+  
+  chart_data = ae_data_tidy |> 
+    filter(hospital_name %in% input$hosp_input_ae) |> 
+    line_chart_function(week_ending_date, number_of_attendances_episode, 
+                        hospital_name)
+
+})
