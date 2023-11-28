@@ -14,6 +14,7 @@ ae_data_agg_reactive = reactive({
 # Creating HB graph
 output$hb_attendances_chart = renderPlotly({
   
+  #browser()
   ae_data_reactive() |> 
     plot_ly(x = ~week_ending_date,
             y = ~number_of_attendances_episode,
@@ -50,6 +51,7 @@ output$input_hosp_ui = renderUI({
   if(input$hb_select_location == "Scotland") {
     location_list = hosp_list$hospital_name
   } else {
+    #browser()
     location_list = hosp_list |> 
       filter(hb == input$hb_select_location)
   }
